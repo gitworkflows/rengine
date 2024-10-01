@@ -88,6 +88,7 @@ RUN printf "\
     github.com/tomnomnom/waybackurls@latest\n\
     github.com/projectdiscovery/httpx/cmd/httpx@latest\n\
     github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest\n\
+    github.com/projectdiscovery/chaos-client/cmd/chaos@latest\n\
     github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest\n\
     github.com/projectdiscovery/naabu/v2/cmd/naabu@latest\n\
     github.com/hakluke/hakrawler@latest\n\
@@ -105,7 +106,10 @@ RUN printf "\
 # Update Nuclei and Nuclei-Templates
 RUN nuclei -update-templates
 
-# Install Python dependencies
+# update chaos
+RUN chaos -update
+
+# Copy requirements
 COPY ./requirements.txt /tmp/requirements.txt
 RUN pip3 install --upgrade setuptools==72.1.0 \
     && pip3 install -r /tmp/requirements.txt --no-cache-dir
